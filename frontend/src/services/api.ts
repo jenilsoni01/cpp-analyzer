@@ -1,0 +1,27 @@
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export const getCodeforcesProfile = async (handle: string) => {
+  const response = await api.get(`http://localhost:8000/profile/codeforces/${handle}`);
+  return response.data;
+};
+
+export const getLeetcodeProfile = async (username: string) => {
+  const response = await api.get(`http://localhost:8000/profile/leetcode/${username}`);
+  return response.data;
+};
+
+export const getLeaderboard = async () => {
+  const response = await api.get('/leaderboard');
+  return response.data;
+};
+
+export default api;
